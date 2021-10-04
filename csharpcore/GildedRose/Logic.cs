@@ -29,50 +29,44 @@ namespace GildedRoseKata
                 if (IsRegularItem(item) && item.Quality > MIN_QUALTITY)
                 {
                     item.Quality--;
+                    if (item.SellIn <= 0 && item.Quality > MIN_QUALTITY)
+                        item.Quality--;
                 }
 
-                if (IsAgedBrie(item) && item.Quality < MAX_QUALITY)
+                if (IsAgedBrie(item))
                 {
                     item.Quality++;
+                    if (item.SellIn <= 0)
+                        item.Quality++;
                 }
 
                 if (IsBackstagepass(item) && item.Quality > MIN_QUALTITY)
                 {
-                    if (item.SellIn == 0)
+
+                        item.Quality++;
+
+                        if (item.SellIn < BACKSTAGEPASS_THRESHOLD_1)
+                        {
+                            item.Quality++;
+                        }
+
+                        if (item.SellIn < BACKSTAGEPASS_THRESHOLD_2)
+                        {
+                            item.Quality++;
+                        }
+                    
+                    if (item.SellIn <= 0)
                     {
                         item.Quality = 0;
-                        continue;
-                    }
-                    item.Quality++;
-
-                    if (item.SellIn < BACKSTAGEPASS_THRESHOLD_1)
-                    {
-                        item.Quality++;
-                    }
-
-                    if (item.SellIn < BACKSTAGEPASS_THRESHOLD_2)
-                    {
-                        item.Quality++;
                     }
 
                 }
 
+                if (item.Quality > MAX_QUALITY)
+                    item.Quality = MAX_QUALITY;
 
-                //if (item.SellIn < MIN_QUALTITY)
-                //{
-
-                //    if (item.Quality > MIN_QUALTITY)
-                //    {
-                //        item.Quality--;
-                //    }
-
-                //    if (item.Quality < MAX_QUALITY)
-                //    {
-                //        item.Quality++;
-                //    }
-
-                //}
                 item.SellIn--;
+
             }
         }
 
