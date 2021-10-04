@@ -22,6 +22,10 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
+                if (IsSulfuras(item))
+                    continue;
+
+
                 if (IsRegularItem(item) && item.Quality > MIN_QUALTITY)
                 {
                     item.Quality--;
@@ -32,62 +36,43 @@ namespace GildedRoseKata
                     item.Quality++;
                 }
 
-                else
+                if (IsBackstagepass(item) && item.Quality > MIN_QUALTITY)
                 {
-                    if (item.Quality < MAX_QUALITY)
+                    if (item.SellIn == 0)
+                    {
+                        item.Quality = 0;
+                        continue;
+                    }
+                    item.Quality++;
+
+                    if (item.SellIn < BACKSTAGEPASS_THRESHOLD_1)
                     {
                         item.Quality++;
-
-                        if (IsBackstagepass(item))
-                        {
-                            if (item.SellIn < BACKSTAGEPASS_THRESHOLD_1)
-                            {
-                                if (item.Quality < MAX_QUALITY)
-                                {
-                                    item.Quality++;
-                                }
-                            }
-
-                            if (item.SellIn < BACKSTAGEPASS_THRESHOLD_2)
-                            {
-                                if (item.Quality < MAX_QUALITY)
-                                {
-                                    item.Quality++;
-                                }
-                            }
-                        }
                     }
-                }
 
-                if (!IsSulfuras(item))
-                {
-                    item.SellIn--;
-                }
-
-                if (item.SellIn < MIN_QUALTITY)
-                {
-
-                    if (!IsBackstagepass(item))
+                    if (item.SellIn < BACKSTAGEPASS_THRESHOLD_2)
                     {
-                        if (item.Quality > MIN_QUALTITY)
-                        {
-                            if (!IsSulfuras(item))
-                            {
-                                item.Quality--;
-                            }
-                        }
-
-                        item.Quality -= item.Quality;
-
+                        item.Quality++;
                     }
-                    else
-                    {
-                        if (item.Quality < MAX_QUALITY)
-                        {
-                            item.Quality++;
-                        }
-                    }
+
                 }
+
+
+                //if (item.SellIn < MIN_QUALTITY)
+                //{
+
+                //    if (item.Quality > MIN_QUALTITY)
+                //    {
+                //        item.Quality--;
+                //    }
+
+                //    if (item.Quality < MAX_QUALITY)
+                //    {
+                //        item.Quality++;
+                //    }
+
+                //}
+                item.SellIn--;
             }
         }
 
