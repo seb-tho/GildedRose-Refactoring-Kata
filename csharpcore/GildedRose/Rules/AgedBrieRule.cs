@@ -2,9 +2,9 @@
 
 namespace GildedRose.Rules
 {
-    public class AgedBrieRule : RuleBase
+    public class AgedBrieRule : IRule
     {
-        public override Item ApplyRule(Item item)
+        public Item ApplyRule(Item item)
         {
             item.Quality++;
             if (item.SellIn <= 0)

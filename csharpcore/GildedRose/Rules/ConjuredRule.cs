@@ -2,9 +2,9 @@
 
 namespace GildedRose.Rules
 {
-    public class ConjuredRule : RuleBase
+    public class ConjuredRule : IRule
     {
-        public override Item ApplyRule(Item item)
+        public Item ApplyRule(Item item)
         {
             item.Quality -= 2;
             if (item.SellIn <= 0)

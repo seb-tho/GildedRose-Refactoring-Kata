@@ -11,18 +11,18 @@ namespace GildedRose
         public const string CONJURED = "Conjured";
 
 
-        //public Dictionary<string, RuleBase> Rules { get; set; }
+        public Dictionary<string, RuleBase> Rules { get; set; }
 
         public RulesRepo(IEnumerable<Item> items)
         {
-            //Rules = FillDictionary();
-           
+            Rules = FillDictionary();
+
         }
 
-        //private Dictionary<string, RuleBase> FillDictionary()
-        //{
-        //    Rules.Add(AGED_BRIE, new RuleBase());
+        private Dictionary<string, RuleBase> FillDictionary()
+        {
+            Rules.Add(AGED_BRIE, new RuleBase());
 
-        //}
+        }
     }
 }
