@@ -10,7 +10,6 @@ namespace GildedRose
         public const string SULFURAS = "Sulfuras, Hand of Ragnaros";
         public const string CONJURED = "Conjured";
         public const string REGULAR = "Regular";
- 
 
         public Dictionary<string, IRule> Rules { get; set; }
 
@@ -23,7 +22,7 @@ namespace GildedRose
         {
             return new Dictionary<string, IRule>
             {
-                {REGULAR, new RegularRule() },
+                { REGULAR, new RegularRule() },
                 { AGED_BRIE, new AgedBrieRule() },
                 { BACKSTAGEPASS, new BackStagePassRule() },
                 { SULFURAS, new SulfurasRule() },

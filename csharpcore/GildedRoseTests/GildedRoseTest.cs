@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using System.Collections.Generic;
 using GildedRoseKata;
+using GildedRose;
 
 namespace GildedRoseTests
 {
@@ -181,7 +182,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetRegularItems))]
         public void UpdateQuality_WithRegularItem_LowersSellInBy1(List<Item> regularItem)
         {
-            var logic = new Logic(regularItem);
+            var logic = new Logic(regularItem, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(19, regularItem[0].SellIn);
         }
@@ -190,7 +191,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetRegularItems))]
         public void UpdateQuality_WithRegularItem_LowersQualityBy1(List<Item> regularItem)
         {
-            var logic = new Logic(regularItem);
+            var logic = new Logic(regularItem, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(39, regularItem[0].Quality);
         }
@@ -199,7 +200,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetRegularItemsPassedSellIn))]
         public void UpdateQuality_WithRegularItemPassedSellIn_LowersQualityBy2(List<Item> regularItem)
         {
-            var logic = new Logic(regularItem);
+            var logic = new Logic(regularItem, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(38, regularItem[0].Quality);
         }
@@ -208,7 +209,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetMixedItems))]
         public void UpdateQuality_QualityOfItem_IsNeverNegative(List<Item> mixedItems)
         {
-            var logic = new Logic(mixedItems);
+            var logic = new Logic(mixedItems, new RulesRepo());
             for (int i = 0; i < 51; i++)
             {
                 logic.UpdateQuality();
@@ -225,7 +226,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetAgedBrie))]
         public void UpdateQuality_WithAgedBrie_IncreasesQuality(List<Item> agedBrie)
         {
-            var logic = new Logic(agedBrie);
+            var logic = new Logic(agedBrie, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(41, agedBrie[0].Quality);
         }
@@ -234,7 +235,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetMixedItemsExceptSulfuras))]
         public void UpdateQuality_QualityIsNeverMoreThan50(List<Item> mixedItemsExceptSulfuras)
         {
-            var logic = new Logic(mixedItemsExceptSulfuras);
+            var logic = new Logic(mixedItemsExceptSulfuras, new RulesRepo());
             for (int i = 0; i < 51; i++)
             {
                 logic.UpdateQuality();
@@ -250,7 +251,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetSulfuras))]
         public void UpdateQuality_WithSulfuras_DoesNotAlterSellIn(List<Item> sulfuras)
         {
-            var logic = new Logic(sulfuras);
+            var logic = new Logic(sulfuras, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(20, sulfuras[0].SellIn);
         }
@@ -259,7 +260,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetSulfuras))]
         public void UpdateQuality_WithSulfuras_DoesNotAlterQuality(List<Item> sulfuras)
         {
-            var logic = new Logic(sulfuras);
+            var logic = new Logic(sulfuras, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(80, sulfuras[0].Quality);
         }
@@ -268,7 +269,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetBackstagePassSellIn10OrLess))]
         public void UpdateQuality_WithBackstagePass_IncreasesQualityBy2_WhenSellInIs10OrLess(List<Item> backstagePassSellIn10OrLess)
         {
-            var logic = new Logic(backstagePassSellIn10OrLess);
+            var logic = new Logic(backstagePassSellIn10OrLess, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(22, backstagePassSellIn10OrLess[0].Quality);
             Assert.Equal(22, backstagePassSellIn10OrLess[1].Quality);
@@ -278,7 +279,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetBackstagePassSellIn5OrLess))]
         public void UpdateQuality_WithBackstagePass_IncreasesQualityBy3_WhenSellInIs5OrLess(List<Item> backstagePassSellIn5OrLess)
         {
-            var logic = new Logic(backstagePassSellIn5OrLess);
+            var logic = new Logic(backstagePassSellIn5OrLess, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(23, backstagePassSellIn5OrLess[0].Quality);
             Assert.Equal(23, backstagePassSellIn5OrLess[1].Quality);
@@ -288,7 +289,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetBackstagePassAfterConcert))]
         public void UpdateQuality_WithBackstagePass_QualityEquals0AfterConcert(List<Item> backstagePassAfterConcert)
         {
-            var logic = new Logic(backstagePassAfterConcert);
+            var logic = new Logic(backstagePassAfterConcert, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(0, backstagePassAfterConcert[0].Quality);
         }
@@ -297,7 +298,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetConjuredItems))]
         public void UpdateQuality_WithConjuredItem_LowersQualityBy2(List<Item> conjuredItem)
         {
-            var logic = new Logic(conjuredItem);
+            var logic = new Logic(conjuredItem, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(38, conjuredItem[0].Quality);
         }
@@ -306,7 +307,7 @@ namespace GildedRoseTests
         [MemberData(nameof(GetConjuredItemsPassedSellIn))]
         public void UpdateQuality_WithConjuredItemPassedSellIn_LowersQualityBy4(List<Item> conjuredItem)
         {
-            var logic = new Logic(conjuredItem);
+            var logic = new Logic(conjuredItem, new RulesRepo());
             logic.UpdateQuality();
             Assert.Equal(36, conjuredItem[0].Quality);
         }

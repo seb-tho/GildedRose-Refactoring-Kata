@@ -6,15 +6,12 @@ namespace GildedRoseKata
     public class Logic
     {
         private readonly IList<Item> Items;
-        //private readonly IList<ItemDto> ItemDtos;
-
         private readonly RulesRepo RulesRepo;
 
-        public Logic(IList<Item> items)
+        public Logic(IList<Item> items, RulesRepo rulesRepo)
         {
             Items = items;
-            //HIDDEN DEPENDENCY
-            RulesRepo = new RulesRepo();
+            RulesRepo = rulesRepo;
         }
 
         public void UpdateQuality()

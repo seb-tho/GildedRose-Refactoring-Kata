@@ -23,6 +23,7 @@ namespace GildedRose.Rules
         protected virtual Item AdjustQuality(Item item) {
             return item;
         }
+
         protected virtual Item AdjustSellIn(Item item) {
             item.SellIn--;
             return item;

@@ -38,10 +38,7 @@ namespace GildedRoseKata
 				new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
             };
 
-
-            var rulesRepo = new RulesRepo();
-            var logic = new Logic(Items);
-
+            var logic = new Logic(Items, new RulesRepo());
 
             for (var i = 0; i < 31; i++)
             {
