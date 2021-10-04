@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRoseTests", "GildedRo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F24608F9-6BA2-48F6-8618-F8B216863260}"
 	ProjectSection(SolutionItems) = preProject
+		README.MD = README.MD
 		Requirements.txt = Requirements.txt
 	EndProjectSection
 EndProject
