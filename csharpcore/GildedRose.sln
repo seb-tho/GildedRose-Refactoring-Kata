@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRose", "GildedRose\GildedRose.csproj", "{D781C52B-92C0-48BF-8414-177495DF4174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRoseTests", "GildedRoseTests\GildedRoseTests.csproj", "{CB6715CE-A283-4C70-9C1B-F58822077731}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRoseTests", "GildedRoseTests\GildedRoseTests.csproj", "{CB6715CE-A283-4C70-9C1B-F58822077731}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F24608F9-6BA2-48F6-8618-F8B216863260}"
+	ProjectSection(SolutionItems) = preProject
+		Requirements.txt = Requirements.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
