@@ -22,16 +22,13 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
-                if (!IsAgedBrie(item) && !IsBackstagepass(item))
+                if (IsRegularItem(item) && item.Quality > MIN_QUALTITY)
                 {
-                    if (item.Quality > MIN_QUALTITY)
-                    {
-                        if (!IsSulfuras(item))
-                        {
-                            item.Quality--;
-                        }
-                    }
+                    item.Quality--;
                 }
+
+
+
                 else
                 {
                     if (item.Quality < MAX_QUALITY)
@@ -92,6 +89,11 @@ namespace GildedRoseKata
                     }
                 }
             }
+        }
+
+        private static bool IsRegularItem(Item item)
+        {
+            return !IsSulfuras(item) && !IsAgedBrie(item) && !IsBackstagepass(item);
         }
 
         private static bool IsSulfuras(Item item)
