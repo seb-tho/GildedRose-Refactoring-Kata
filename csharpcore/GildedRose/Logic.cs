@@ -27,7 +27,10 @@ namespace GildedRoseKata
                     item.Quality--;
                 }
 
-
+                if (IsAgedBrie(item) && item.Quality < MAX_QUALITY)
+                {
+                    item.Quality++;
+                }
 
                 else
                 {
@@ -63,22 +66,19 @@ namespace GildedRoseKata
 
                 if (item.SellIn < MIN_QUALTITY)
                 {
-                    if (!IsAgedBrie(item))
+
+                    if (!IsBackstagepass(item))
                     {
-                        if (!IsBackstagepass(item))
+                        if (item.Quality > MIN_QUALTITY)
                         {
-                            if (item.Quality > MIN_QUALTITY)
+                            if (!IsSulfuras(item))
                             {
-                                if (!IsSulfuras(item))
-                                {
-                                    item.Quality--;
-                                }
+                                item.Quality--;
                             }
                         }
-                        else
-                        {
-                            item.Quality -= item.Quality;
-                        }
+
+                        item.Quality -= item.Quality;
+
                     }
                     else
                     {
