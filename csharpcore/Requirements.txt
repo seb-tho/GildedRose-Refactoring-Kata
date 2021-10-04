@@ -20,7 +20,7 @@ REQUIREMENTS
 
 
 TODO
-	1) make tests for existing features(check each requirements + code coverage)
+	1) make tests for existing features(check each requirement + code coverage)
 	2) refactor
 	3) make test for new feature
 	4) implement new feature

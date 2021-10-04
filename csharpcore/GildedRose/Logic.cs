@@ -2,10 +2,10 @@
 
 namespace GildedRoseKata
 {
-    public class GildedRose
+    public class Logic
     {
         IList<Item> Items;
-        public GildedRose(IList<Item> Items)
+        public Logic(IList<Item> Items)
         {
             this.Items = Items;
         }
