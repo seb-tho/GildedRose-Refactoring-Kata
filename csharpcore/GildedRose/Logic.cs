@@ -7,6 +7,7 @@ namespace GildedRoseKata
         private const string AGED_BRIE = "Aged Brie";
         private const string BACKSTAGEPASS = "Backstage passes to a TAFKAL80ETC concert";
         private const string SULFURAS = "Sulfuras, Hand of Ragnaros";
+        private const string CONJURED = "Conjured";
         private const int MAX_QUALITY = 50;
         private const int MIN_QUALTITY = 0;
         private const int BACKSTAGEPASS_THRESHOLD_1 = 11;
@@ -25,11 +26,17 @@ namespace GildedRoseKata
                 if (IsSulfuras(item))
                     continue;
 
-
-                if (IsRegularItem(item) && item.Quality > MIN_QUALTITY)
+                if (item.Name.StartsWith(CONJURED))
                 {
                     item.Quality--;
-                    if (item.SellIn <= 0 && item.Quality > MIN_QUALTITY)
+                    if (item.SellIn <= 0)
+                        item.Quality--;
+                }
+
+                if (IsRegularItem(item))
+                {
+                    item.Quality--;
+                    if (item.SellIn <= 0)
                         item.Quality--;
                 }
 
@@ -40,21 +47,21 @@ namespace GildedRoseKata
                         item.Quality++;
                 }
 
-                if (IsBackstagepass(item) && item.Quality > MIN_QUALTITY)
+                if (IsBackstagepass(item))
                 {
 
+                    item.Quality++;
+
+                    if (item.SellIn < BACKSTAGEPASS_THRESHOLD_1)
+                    {
                         item.Quality++;
+                    }
 
-                        if (item.SellIn < BACKSTAGEPASS_THRESHOLD_1)
-                        {
-                            item.Quality++;
-                        }
+                    if (item.SellIn < BACKSTAGEPASS_THRESHOLD_2)
+                    {
+                        item.Quality++;
+                    }
 
-                        if (item.SellIn < BACKSTAGEPASS_THRESHOLD_2)
-                        {
-                            item.Quality++;
-                        }
-                    
                     if (item.SellIn <= 0)
                     {
                         item.Quality = 0;
@@ -62,12 +69,20 @@ namespace GildedRoseKata
 
                 }
 
-                if (item.Quality > MAX_QUALITY)
-                    item.Quality = MAX_QUALITY;
+                GuardQualityBorders(item);
 
                 item.SellIn--;
 
             }
+        }
+
+        private static void GuardQualityBorders(Item item)
+        {
+            if (item.Quality > MAX_QUALITY)
+                item.Quality = MAX_QUALITY;
+
+            if (item.Quality < MIN_QUALTITY)
+                item.Quality = MIN_QUALTITY;
         }
 
         private static bool IsRegularItem(Item item)

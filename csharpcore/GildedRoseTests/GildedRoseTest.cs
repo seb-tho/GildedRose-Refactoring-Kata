@@ -12,7 +12,7 @@ namespace GildedRoseTests
         private const string AGED_BRIE = "Aged Brie";
         private const string SULFURAS = "Sulfuras, Hand of Ragnaros";
         private const string BACKSTAGEPASS = "Backstage passes to a TAFKAL80ETC concert";
-        private const string CONJURED = "Conjured Mana Cake";
+        private const string CONJURED_ITEM = "Conjured Apple Pie";
 
         public static IEnumerable<object[]> GetRegularItems()
         {
@@ -56,7 +56,7 @@ namespace GildedRoseTests
                     SellIn = 5,
                     Quality = 49
                 },
-                new Item {Name = CONJURED, SellIn = 3, Quality = 6}
+                new Item {Name = CONJURED_ITEM, SellIn = 3, Quality = 6}
             };
 
             return new List<object[]>
@@ -90,7 +90,7 @@ namespace GildedRoseTests
                     SellIn = 5,
                     Quality = 49
                 },
-                new Item {Name = CONJURED, SellIn = 3, Quality = 6}
+                new Item {Name = CONJURED_ITEM, SellIn = 3, Quality = 6}
             };
 
             return new List<object[]>
@@ -158,6 +158,23 @@ namespace GildedRoseTests
                 }
             };
         }
+
+        public static IEnumerable<object[]> GetConjuredItems()
+        {
+            return new List<object[]>
+            {
+                new object[] { new List<Item> { new Item { Name = CONJURED_ITEM, SellIn = 20, Quality = 40 } } }
+            };
+        }
+
+        public static IEnumerable<object[]> GetConjuredItemsPassedSellIn()
+        {
+            return new List<object[]>
+            {
+                new object[] { new List<Item> { new Item { Name = CONJURED_ITEM, SellIn = 0, Quality = 40 } } }
+            };
+        }
+
         #endregion
 
         [Theory]
@@ -275,5 +292,24 @@ namespace GildedRoseTests
             logic.UpdateQuality();
             Assert.Equal(0, backstagePassAfterConcert[0].Quality);
         }
+
+        [Theory]
+        [MemberData(nameof(GetConjuredItems))]
+        public void UpdateQuality_WithConjuredItem_LowersQualityBy2(List<Item> conjuredItem)
+        {
+            var logic = new Logic(conjuredItem);
+            logic.UpdateQuality();
+            Assert.Equal(38, conjuredItem[0].Quality);
+        }
+
+        [Theory]
+        [MemberData(nameof(GetConjuredItemsPassedSellIn))]
+        public void UpdateQuality_WithConjuredItemPassedSellIn_LowersQualityBy4(List<Item> conjuredItem)
+        {
+            var logic = new Logic(conjuredItem);
+            logic.UpdateQuality();
+            Assert.Equal(36, conjuredItem[0].Quality);
+        }
+
     }
 }
