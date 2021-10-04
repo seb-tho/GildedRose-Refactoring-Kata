@@ -139,7 +139,7 @@ namespace GildedRoseTests
                     new List<Item>
                     {
                         new Item { Name = BACKSTAGEPASS, SellIn = 5, Quality = 20 },
-                        new Item { Name = BACKSTAGEPASS, SellIn = 2, Quality = 20 }
+                        new Item { Name = BACKSTAGEPASS, SellIn = 1, Quality = 20 }
                     }
                 }
             };
