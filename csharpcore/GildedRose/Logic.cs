@@ -28,7 +28,7 @@ namespace GildedRoseKata
                     {
                         if (!IsSulfuras(item))
                         {
-                            item.Quality = item.Quality - 1;
+                            item.Quality--;
                         }
                     }
                 }
@@ -36,7 +36,7 @@ namespace GildedRoseKata
                 {
                     if (item.Quality < MAX_QUALITY)
                     {
-                        item.Quality = item.Quality + 1;
+                        item.Quality++;
 
                         if (IsBackstagepass(item))
                         {
@@ -44,7 +44,7 @@ namespace GildedRoseKata
                             {
                                 if (item.Quality < MAX_QUALITY)
                                 {
-                                    item.Quality = item.Quality + 1;
+                                    item.Quality++;
                                 }
                             }
 
@@ -52,7 +52,7 @@ namespace GildedRoseKata
                             {
                                 if (item.Quality < MAX_QUALITY)
                                 {
-                                    item.Quality = item.Quality + 1;
+                                    item.Quality++;
                                 }
                             }
                         }
@@ -61,7 +61,7 @@ namespace GildedRoseKata
 
                 if (!IsSulfuras(item))
                 {
-                    item.SellIn = item.SellIn - 1;
+                    item.SellIn--;
                 }
 
                 if (item.SellIn < MIN_QUALTITY)
@@ -74,20 +74,20 @@ namespace GildedRoseKata
                             {
                                 if (!IsSulfuras(item))
                                 {
-                                    item.Quality = item.Quality - 1;
+                                    item.Quality--;
                                 }
                             }
                         }
                         else
                         {
-                            item.Quality = item.Quality - item.Quality;
+                            item.Quality -= item.Quality;
                         }
                     }
                     else
                     {
                         if (item.Quality < MAX_QUALITY)
                         {
-                            item.Quality = item.Quality + 1;
+                            item.Quality++;
                         }
                     }
                 }
