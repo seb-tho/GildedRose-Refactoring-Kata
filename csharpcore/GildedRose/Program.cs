@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GildedRose;
+using System;
 using System.Collections.Generic;
 
 namespace GildedRoseKata
@@ -37,7 +38,9 @@ namespace GildedRoseKata
 				new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
             };
 
-            var logic = new Logic(Items);
+
+            var specialItems = new SpecialItems();
+            var logic = new Logic(Items, specialItems);
 
 
             for (var i = 0; i < 31; i++)

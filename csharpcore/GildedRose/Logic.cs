@@ -1,74 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using GildedRose;
+using System.Collections.Generic;
 
 namespace GildedRoseKata
 {
     public class Logic
     {
-        private const string AGED_BRIE = "Aged Brie";
-        private const string BACKSTAGEPASS = "Backstage passes to a TAFKAL80ETC concert";
-        private const string SULFURAS = "Sulfuras, Hand of Ragnaros";
-        private const string CONJURED = "Conjured";
         private const int MAX_QUALITY = 50;
         private const int MIN_QUALTITY = 0;
-        private const int BACKSTAGEPASS_THRESHOLD_1 = 11;
-        private const int BACKSTAGEPASS_THRESHOLD_2 = 6;
-        readonly IList<Item> Items;
 
-        public Logic(IList<Item> Items)
+        private readonly IList<Item> Items;
+        private readonly RulesRepo RulesRepo;
+
+        public Logic(IList<Item> items, RulesRepo rulesRepo)
         {
-            this.Items = Items;
+            Items = items;
+            RulesRepo = rulesRepo;
         }
 
         public void UpdateQuality()
         {
             foreach (var item in Items)
             {
-                if (IsSulfuras(item))
-                    continue;
-
-                if (item.Name.StartsWith(CONJURED))
-                {
-                    item.Quality--;
-                    if (item.SellIn <= 0)
-                        item.Quality--;
-                }
-
-                if (IsRegularItem(item))
-                {
-                    item.Quality--;
-                    if (item.SellIn <= 0)
-                        item.Quality--;
-                }
-
-                if (IsAgedBrie(item))
-                {
-                    item.Quality++;
-                    if (item.SellIn <= 0)
-                        item.Quality++;
-                }
-
-                if (IsBackstagepass(item))
-                {
-
-                    item.Quality++;
-
-                    if (item.SellIn < BACKSTAGEPASS_THRESHOLD_1)
-                    {
-                        item.Quality++;
-                    }
-
-                    if (item.SellIn < BACKSTAGEPASS_THRESHOLD_2)
-                    {
-                        item.Quality++;
-                    }
-
-                    if (item.SellIn <= 0)
-                    {
-                        item.Quality = 0;
-                    }
-
-                }
-
+  
                 GuardQualityBorders(item);
 
                 item.SellIn--;
