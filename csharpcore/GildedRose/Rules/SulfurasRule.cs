@@ -2,9 +2,14 @@
 
 namespace GildedRose.Rules
 {
-    class SulfurasRule : IRule
+    public class SulfurasRule : RuleBase
     {
-        public Item ApplyRule(Item item)
+        protected override Item AdjustQuality(Item item)
+        {
+            return item;
+        }
+
+        protected override Item AdjustSellIn(Item item)
         {
             return item;
         }

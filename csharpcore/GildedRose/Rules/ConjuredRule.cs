@@ -2,13 +2,14 @@
 
 namespace GildedRose.Rules
 {
-    public class ConjuredRule : IRule
+    public class ConjuredRule : RuleBase
     {
-        public Item ApplyRule(Item item)
+        protected override Item AdjustQuality(Item item)
         {
             item.Quality -= 2;
             if (item.SellIn <= 0)
                 item.Quality -= 2;
+            item = GuardQualityBorders(item);
             return item;
         }
     }

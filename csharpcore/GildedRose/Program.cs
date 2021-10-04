@@ -39,8 +39,8 @@ namespace GildedRoseKata
             };
 
 
-            var specialItems = new SpecialItems();
-            var logic = new Logic(Items, specialItems);
+            var rulesRepo = new RulesRepo();
+            var logic = new Logic(Items);
 
 
             for (var i = 0; i < 31; i++)

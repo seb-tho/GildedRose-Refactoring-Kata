@@ -2,14 +2,15 @@
 
 namespace GildedRose.Rules
 {
-    public class AgedBrieRule : IRule
+    public class AgedBrieRule : RuleBase
     {
-        public Item ApplyRule(Item item)
+        protected override Item AdjustQuality(Item item)
         {
             item.Quality++;
             if (item.SellIn <= 0)
                 item.Quality++;
 
+            item = GuardQualityBorders(item);
             return item;
         }
     }

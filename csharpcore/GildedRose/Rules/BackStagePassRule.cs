@@ -2,12 +2,12 @@
 
 namespace GildedRose.Rules
 {
-    public class BackStagePassRule : IRule
+    public class BackStagePassRule: RuleBase
     {
         public const int BACKSTAGEPASS_THRESHOLD_1 = 11;
         public const int BACKSTAGEPASS_THRESHOLD_2 = 6;
 
-        public Item ApplyRule(Item item)
+        protected override Item AdjustQuality(Item item)
         {
             item.Quality++;
 
@@ -25,6 +25,7 @@ namespace GildedRose.Rules
             {
                 item.Quality = 0;
             }
+            item = GuardQualityBorders(item);
             return item;
         }
 
