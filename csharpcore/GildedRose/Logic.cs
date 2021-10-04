@@ -11,7 +11,7 @@ namespace GildedRoseKata
         private const int MIN_QUALTITY = 0;
         private const int BACKSTAGEPASS_THRESHOLD_1 = 11;
         private const int BACKSTAGEPASS_THRESHOLD_2 = 6;
-        IList<Item> Items;
+        readonly IList<Item> Items;
 
         public Logic(IList<Item> Items)
         {
@@ -22,11 +22,11 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
-                if (item.Name != AGED_BRIE && item.Name != BACKSTAGEPASS)
+                if (!IsAgedBrie(item) && !IsBackstagepass(item))
                 {
                     if (item.Quality > MIN_QUALTITY)
                     {
-                        if (item.Name != SULFURAS)
+                        if (!IsSulfuras(item))
                         {
                             item.Quality = item.Quality - 1;
                         }
@@ -38,7 +38,7 @@ namespace GildedRoseKata
                     {
                         item.Quality = item.Quality + 1;
 
-                        if (item.Name == BACKSTAGEPASS)
+                        if (IsBackstagepass(item))
                         {
                             if (item.SellIn < BACKSTAGEPASS_THRESHOLD_1)
                             {
@@ -59,20 +59,20 @@ namespace GildedRoseKata
                     }
                 }
 
-                if (item.Name != SULFURAS)
+                if (!IsSulfuras(item))
                 {
                     item.SellIn = item.SellIn - 1;
                 }
 
                 if (item.SellIn < MIN_QUALTITY)
                 {
-                    if (item.Name != AGED_BRIE)
+                    if (!IsAgedBrie(item))
                     {
-                        if (item.Name != BACKSTAGEPASS)
+                        if (!IsBackstagepass(item))
                         {
                             if (item.Quality > MIN_QUALTITY)
                             {
-                                if (item.Name != SULFURAS)
+                                if (!IsSulfuras(item))
                                 {
                                     item.Quality = item.Quality - 1;
                                 }
@@ -92,6 +92,21 @@ namespace GildedRoseKata
                     }
                 }
             }
+        }
+
+        private static bool IsSulfuras(Item item)
+        {
+            return item.Name == SULFURAS;
+        }
+
+        private static bool IsAgedBrie(Item item)
+        {
+            return item.Name == AGED_BRIE;
+        }
+
+        private static bool IsBackstagepass(Item item)
+        {
+            return item.Name == BACKSTAGEPASS;
         }
     }
 }
