@@ -1,12 +1,10 @@
 ﻿using GildedRoseKata;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GildedRose.Rules
 {
     public abstract class RuleBase: IRule
     {
+        //I could have used a Quality class with max and min as props, maybe if the app were more complex. 
         private const int MAX_QUALITY = 50;
         private const int MIN_QUALTITY = 0;
         protected virtual Item GuardQualityBorders(Item item)

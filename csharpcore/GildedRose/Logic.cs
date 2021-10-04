@@ -22,6 +22,7 @@ namespace GildedRoseKata
                 {
                     rule.ApplyRule(item);
                 }
+                //subdiving items into more categories could further simplify this logic but seemed out of scope
                 else if (item.Name.StartsWith(RulesRepo.CONJURED))
                 {
                     RulesRepo.Rules.GetValueOrDefault(RulesRepo.CONJURED).ApplyRule(item);
